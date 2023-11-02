@@ -1,0 +1,421 @@
+body {
+  padding:10px;
+  width: 100%;
+}
+*{
+  box-sizing: border-box;
+}
+
+h1,h2,h3,h4,h5{
+  margin-bottom: 5px;
+}
+.loader{
+  width: 100%;
+  height: 100vh;
+  position: fixed;
+  background: rgba(255, 255,255, 0.9);
+  left: 0;
+  right: 0;
+  top:0;
+  bottom: 0;
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.loaderImg {
+  height: 100px;
+  pointer-events: none;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .loaderImg {
+    animation: App-logo-spin infinite 20s linear;
+  }
+}
+
+
+@keyframes App-logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.wrap{
+  width: 100%;
+  display: flex;
+  font-size: 14px;
+  color: #555;
+  flex-wrap: wrap;
+}
+
+.wrap_half{
+  width: calc(50% - 20px);
+  display: flex;
+  padding: 10px;
+  margin: 10px;
+  flex-wrap: wrap;
+}
+.wrap_half2{
+  width: calc(50% - 20px);
+  display: flex;
+  padding: 10px;
+  margin: 10px;
+  align-content: flex-start;
+  flex-wrap: wrap;
+}
+/* .wrap_half:nth-child(odd){
+  border-right: 1px dashed #ddd;
+} */
+@media (max-width: 960px){
+  .wrap_half,
+  .wrap_half2{
+    width: calc(100% - 20px);
+  }
+}
+.weather{
+  width: 100%;
+  /* border-right: 1px dashed #ddd; */
+  padding: 0 10px;
+}
+
+.icon{
+  width: 20px;
+  margin-right: 7px;
+  display: inline-block;
+}
+
+.weather h3{
+  font-size: 28px;
+  color: #000;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+  font-weight: 400;
+  align-items: center;
+  margin-top: 0;
+  line-height: 21px;
+}
+.tempNow{
+  width: 100%;
+  position: relative;
+  font-size: 50px;
+  color: #fff;
+  font-weight: 700;
+  line-height: 59px;
+  text-transform: capitalize;
+}
+.tempNow .deg{
+  font-size: 17px;
+    display: inline-block;
+    position: absolute;
+    top: 9px;
+    line-height: 14px;
+}
+
+.chooseWeather{
+    width: 100%;
+    display: flex;
+    padding: 20px;
+    flex-wrap: wrap;
+    background: #f3f3f3;
+    border-radius: 7px 7px 0 0;
+    justify-content: space-between;
+}
+.chooseWeather span{
+  display: inline-block;
+}
+.selectedCountry{
+  display: flex; 
+  margin-top: 5px;
+}
+.selectedCountry input{
+  font-size: 13px;
+  color: #333;
+  background: #fff;
+  border: 1px solid #ddd;
+  height: 50px;
+  border-radius: 4px 0 0 4px;
+  padding: 0 10px;
+}
+.selectedCountry input:hover,
+  .selectedCountry input:focus{
+  outline: none;
+}
+.selectedCountry button{
+  background: #70ccf3;
+  height: 50px;
+  border-radius: 0 4px 4px 0;
+  color:#fff;
+  border: none;
+  padding: 0 15px;
+  cursor: pointer;
+}
+.selectedCountry button{
+  background: #287ea3;
+}
+.side_border{
+  border-right: 1px dashed #bbb;
+}
+.bot_border{
+  position:relative;
+  padding-bottom: 25px;
+}
+.bot_border:after{
+  content: "";
+  position:absolute;
+  bottom: -12px;
+  left: 0;
+  width: calc(100% - 20px);
+  border-bottom: 1px dashed #bbb;
+}
+
+.weather_box{
+  background: rgb(12,111,238);
+  background: linear-gradient(45deg, rgba(12,111,238,1) 0%, rgba(67,142,237,1) 50%, rgba(115,188,249,1) 100%);
+  width: calc(50% - 2px);
+  display: flex;
+  align-items: flex-start;
+  padding: 20px;
+  margin: 1px;
+  flex-wrap: wrap;
+  height: 160px;
+}
+
+.showTime{
+  display: flex;
+    flex-wrap: wrap;
+    font-size: 30px;
+    color: rgb(12,111,238);
+    line-height:30px;
+    justify-content: flex-end;
+    font-weight: 700;
+}
+.showTime span{
+  display: block;
+  width: 100%;
+  height: 15px;
+  font-size: 14px;
+  color: #888;
+  text-align: right;
+
+}
+
+.weatherFooter{
+  width: 100%;
+  display: flex;
+  text-align: right;
+  font-size: 13px;
+  font-weight: 700;
+  justify-content: flex-end;
+  align-items: center;
+  background: #ddd;
+  height: 50px;
+  border-radius: 0 0 7px 7px;
+  padding: 0 15px;
+}
+
+.city input {
+  width: 230px;
+}
+
+/* .................................. weather ends here ...................................... */
+
+.dictionary {
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  align-content: flex-start;
+  padding: 30px;
+  background:#f4f4f4;
+  border-radius: 5px;
+}
+.inputBox{
+  width: 100%;
+}
+.text1{
+  width: 100%;
+  display: block;
+  padding: 0 0 10px 0;
+  font-size: 17px;
+  color: #aaa;
+}
+.inputBox input{
+  background: #fff; 
+  border: 1px solid #ddd;
+  height: 60px;
+  border-radius: 4px 0 0 4px;
+  padding: 0 10px;
+  width: 70%;
+  color: #777;
+  font-size: 14px;
+}
+.inputBox input:hover, 
+.inputBox input:focus{
+  outline: none;
+}
+.inputBox button{
+  background: #70ccf3;
+  height: 60px;
+  border-radius: 0 4px 4px 0;
+  color:#fff;
+  border: none;
+  padding: 0 15px;
+  cursor: pointer;
+  width: 30%;
+}
+
+.wordDetails, .deff{
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.mainWord{
+  width: 100%;
+  margin: 20px 0;
+  font-size: 70px;
+  color: #777;
+  font-weight: 400;
+  letter-spacing: 0.4;
+}
+.mainWord .pronan{
+  display: block;
+  font-size: 20px;
+  color: #999;
+}
+
+.deff h3{
+  font-size: 20px;
+  color: #444;
+  width: 100%;
+}
+.deffList{
+  list-style: none;
+  padding: 0 0 12px 20px;
+  margin: 0;
+}
+.deffList p{
+  font-size: 15px;
+  color: #333;
+  padding: 0;
+    margin: 0;
+}
+.deffList div{
+  font-size: 13px;
+  color: #777;
+  font-style: italic;
+  margin-top: 7px;
+}
+
+/* ............................ blog.................... */
+
+.blog_header {
+    width: 100%;
+    margin-bottom: 31px;
+    font-weight: 500;
+    color: #2b8fcb;
+    font-size: 24px;
+    padding: 0 0 10px;
+    border-bottom: 1px solid #6688ff;
+}
+.createBlog{
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+}
+.createBlog input,
+.createBlog textarea{
+    width: 100%;
+    border: 1px solid #518383;
+    height: 40px;
+    padding: 0 10px;
+    background: #696b6b;
+    margin-bottom: 10px;
+    color: #fff;
+}
+.createBlog input::placeholder,
+.createBlog textarea::placeholder{
+  color:#fff
+}
+.createBlog textarea{
+  height: 150px;
+  font-family: inherit;
+  padding-top: 10px;
+}
+.createBlog button{
+  height: 50px;
+  background: #287ea3;
+  color: #fff;
+  font-size: 16px;
+  border: none;
+  padding: 0 20px;
+  width: 100px;
+  cursor: pointer;
+}
+.createBlog button:disabled{
+ cursor: no-drop;
+ opacity: 0.6;
+}
+
+.blogList{
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  list-style: none;
+  align-content: flex-start;
+  padding: 0;
+  margin: 0;
+}
+.blogList li{
+    width: 100%;
+    margin-bottom: 12px;
+    padding: 20px;
+    background: linear-gradient(45deg, rgba(12,111,238,1) 0%, rgba(67,142,237,1) 50%, rgba(115,188,249,1) 100%);
+}
+.blogList .title{
+  color: #fff;
+  font-weight: 500;
+  font-size: 18px;
+  padding-bottom: 8px;
+  margin: 0;
+}
+.blogList .content{
+  color: #f5f5f5;
+  margin: 0;
+  font-size: 15px;
+  padding-bottom: 8px;
+}
+
+.blogFooter{
+  padding-bottom: 14px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 13px;
+  color: #fff;
+  font-weight: 500;
+}
+.error{
+  width: 100%;
+  color: #ff0022;
+  padding-bottom: 12px;
+}
+
+.nolist{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  height: 200px;
+  width: 100%;
+  font: 20px sans-serif;
+  color: #aaa;
+}
+
+
+
