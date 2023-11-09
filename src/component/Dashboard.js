@@ -6,39 +6,63 @@ import temperature  from "../images/temperature.svg";
 import droplet  from "../images/droplet.svg";
 import wind  from "../images/wind.svg";
 import Weather  from "./Weather";
-import Dictionary from "./Dictionary"; 
+import PollutionChart from "./PollutionChart"; 
+import PollutionForecast from "./PollutionForecast"; 
+import WeChart from "./WeChart"; 
 import Blog from "./Blog";
 
 
-function DashBoard(props) {
+function DashBoard() {
 
   const [dateTime, seDateTime] = useState();
+
   const toDate =(val)=>{
     seDateTime(val)
   }
+  const [cityName, setCityName] = useState("");
+  const [cityLat, setCityLat] = useState("");
+  const [cityLon, setCityLon] = useState("");
 
-  console.log("date", dateTime);
+  const cityNameHandler =(val)=>{
+    setCityName(val);
+    //console.log("city", cityName);
 
+  }
+  // const cityLatHandler =(val)=>{
+  //   setCityLat(val);
+  //   //console.log("city", cityName);
+
+  // }
+  // const cityLonHandler =(val)=>{
+  //   setCityLon(val);
+  //   //console.log("city", cityName);
+
+  // }
   return (
     <>
     <div className="wrap">
       <div className="wrap_half">
        <Weather 
-       //totalDateTime={toDate}
+       inputCity={(val) =>cityNameHandler(val)}
        />
+       
+       <WeChart cityNameToChart={cityName}/>
+
       </div>  
       <div className="wrap_half">
-        <Dictionary/>
+        <PollutionChart
+          cityNameToChart={cityName}
+        />
+        <PollutionForecast
+          cityNameToChart={cityName}
+        />
       </div>  
       
     </div>
-    <div className="wrap">
-      <Blog 
-      //today={dateTime}
-      />
-    </div>
+    
+  
     </>
   );
 }
-
+ 
 export default DashBoard;

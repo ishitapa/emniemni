@@ -8,14 +8,15 @@ import wind  from "../images/wind.svg";
 import cloud  from "../images/cloud.svg";
 
 
-function Weather(props) {
+function Weather({inputCity,inputLon, inputLat}) {
 
   const [isLoader, setIsLoader] = useState(false);
   const [rec,setRec] = useState({});
   const [ inputval1, setInputval1] = useState("");
+ 
   
   const apik = "178bd8637e395d99fddf1bd1b7a2d3e0";
-  //const inputval = "kolkata"
+
 
   const fetchData1 = async () =>{
     let inputval ="";
@@ -31,23 +32,22 @@ function Weather(props) {
      if(response){
         const res = await response.json();
         if(res) { 
-          console.log("new api",res);
-          console.log("inputval1",inputval1);
+         // console.log("new api",res);
+         // console.log("inputval1",inputval1);
           setRec(res);
           return;
         }
       }
       }catch (e) {
-      console.log(e.message);
+    //  console.log(e.message);
     }finally{
       setIsLoader(false);
-      
     }
   }
   
   
   useEffect(() => {
-    cityValueSubmit();  
+    cityValueSubmit(); 
    }, []);
 
 const cityValueHandler = (e) =>{
@@ -55,7 +55,9 @@ const cityValueHandler = (e) =>{
 }
 const cityValueSubmit = (e) =>{
   fetchData1();
+  inputCity ( (inputval1 === "") ? "kolkata" : inputval1);
  }
+
 const theDate = new Date();
 const toDayDate = theDate.getDate();
 const todayMonth = theDate.getMonth() + 1;
@@ -66,12 +68,45 @@ const hourNow = theDate.getHours();
 const minNow = theDate.getMinutes();
 const timeNow =  (hourNow < 10 ? "0"+hourNow : hourNow ) + ":" +  (minNow < 10 ? "0"+minNow : minNow );
 
-//props.totalDateTime (toDay +" ," + timeNow) ; 
+
+
+
+   const [rec2,setRec2] = useState({});
+
+   const fetchData3 = async () =>{
+    
+    try {
+      setIsLoader(true);
+    
+    const response = await fetch('https://tile.openweathermap.org/map/clouds_new/1/1/1.png?appid='+apik);
+     if(response){
+        const res = await response.json();
+        if(res) { 
+          setRec2(res);
+          console.log("pollution list api",rec2);
+          return;
+        }
+      }
+      }catch (e) {
+      //console.log(e.message);
+    }finally{
+      setIsLoader(false);
+    }
+  }
+  useEffect(() => {
+    fetchData3();  
+   }, []);
+
+
+
+
+
 
   return (
     <>
-    {isLoader ? <Loader/> : ""}  
     <div className="weather">
+    {isLoader ? <Loader/> : ""}  
+
           <div className="chooseWeather">
             <div className="city">
                   <span>Choose a city for weather report </span>
@@ -110,9 +145,9 @@ const timeNow =  (hourNow < 10 ? "0"+hourNow : hourNow ) + ":" +  (minNow < 10 ?
                {rec?.clouds?.all != null ? <div className="tempNow">{rec?.weather?.[0].description} <span className="deg"></span></div> : ""}
             </div>
           </div>
-          <div className="weatherFooter">
+          {/* <div className="weatherFooter">
              Weather application tool by Ishita Paul Roy
-          </div>
+          </div> */}
         </div>
     </>
   );

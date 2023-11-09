@@ -5,10 +5,9 @@ import React, { useState, useEffect } from "react";
 // import temperature  from "../images/temperature.svg";
 // import droplet  from "../images/droplet.svg";
 // import wind  from "../images/wind.svg";
-import Dictionary from "./Dictionary"; 
 
 
-function Blog(props) {
+function Media(props) {
 
   // const [isLoader, setIsLoader] = useState(false);
   const [listBlogStore,setListBlogStore] = useState();
@@ -93,64 +92,12 @@ useEffect(() => {
    <>
    <div className="wrap">
       <div className="wrap_half2">
-        <h3 className="blog_header">Write Content For your blog</h3>
-        <div className="createBlog">
-          <input type="text" placeholder="Write your Blog title"
-            value={blogVal.title}
-            name="title"
-            onChange={blogHandler}
-          />
-          {errorBlogVal.title && <div className="error">{errorBlogVal.title}</div>}
-
-          <input type="text" placeholder="Name of the Author"
-            value={blogVal.author}
-            name="author"
-            onChange={blogHandler}
-          />
-          {errorBlogVal.author && <div className="error">{errorBlogVal.author}</div>}
-
-          <textarea placeholder="Write your Blog content"
-           value={blogVal.content}
-           name="content"
-           onChange={blogHandler}
-          ></textarea>
-          {errorBlogVal.content && <div className="error">{errorBlogVal.content}</div>}
-
-          <button type="submit"
-           disabled={(blogVal.title.length===0 || blogVal.author.length===0 || blogVal.content.length===0) ? 
-            "disabled" : ""}
-           onClick={BlogSubmit}
-          >Save</button>
-        </div>
-
-         <Dictionary/>
+        <h3 className="blog_header">Media</h3>
+       
       </div>  
-      <div className="wrap_half2">
-         <h3 className="blog_header">Blogs</h3>
-         <ul className="blogList">
-          {listBlogStore  ?
-            listBlogStore.map((elem, key)=>{
-              return(
-                <li key={key}>
-                  <p className="title">{elem.title}</p>
-                  <p className="content">{elem.content}</p>
-                  <div className="blogFooter">
-                    <span>By: {elem.author}</span>
-                    <span>Date: {elem.date}</span>
-                  </div>
-                </li>
-              )
-            })
-           
-          : <div className="nolist">There is no Blog in the list</div>
-          }
-            
-           
-         </ul>
-      </div>  
-      </div>  
+   </div>  
    </>
   );
 }
 
-export default Blog;
+export default Media;

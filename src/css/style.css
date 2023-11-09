@@ -1,6 +1,9 @@
+@import url('https://fonts.googleapis.com/css2?family=Lobster&family=Outfit:wght@400;500;600;700&display=swap');
+
 body {
-  padding:10px;
+  padding:0px;
   width: 100%;
+  font-family: 'Outfit', sans-serif;
 }
 *{
   box-sizing: border-box;
@@ -11,8 +14,8 @@ h1,h2,h3,h4,h5{
 }
 .loader{
   width: 100%;
-  height: 100vh;
-  position: fixed;
+  height: 100%;
+  position: absolute;
   background: rgba(255, 255,255, 0.9);
   left: 0;
   right: 0;
@@ -43,7 +46,51 @@ h1,h2,h3,h4,h5{
     transform: rotate(360deg);
   }
 }
+.app{
+  width: 100%;
+  display: flex;
+  min-height: 100vh;
+}
 
+.aside {
+    width: 250px;
+    padding: 30px;
+    background: #f5fdf5;
+}
+
+.mainContain{
+  width: calc(100% - 250px);
+}
+.specialFont{
+  font-family: 'Lobster', sans-serif;
+}
+.aside .profile{
+  font-size: 40px;
+  color: #2b8fcb;
+  width: 100%;
+  text-align: center;
+  margin-bottom: 50px;
+  padding: 20px;
+  border: 7px solid #2b8fcb;
+  transform: skew(-5deg, -5deg);
+  background: aqua;
+}
+
+.aside ul{
+  margin: 0;
+  padding: 0;
+  list-style: inside decimal;
+}
+.aside ul li{
+  font-size: 20px;
+  padding: 0 0 20px 0;
+}
+.aside ul li a{
+  color: #2b8fcb;
+  text-emphasis-color: aqua;
+  text-decoration: none;
+
+}
 .wrap{
   width: 100%;
   display: flex;
@@ -54,7 +101,7 @@ h1,h2,h3,h4,h5{
 
 .wrap_half{
   width: calc(50% - 20px);
-  display: flex;
+  /* display: flex; */
   padding: 10px;
   margin: 10px;
   flex-wrap: wrap;
@@ -79,18 +126,31 @@ h1,h2,h3,h4,h5{
 .weather{
   width: 100%;
   /* border-right: 1px dashed #ddd; */
-  padding: 0 10px;
+  /* padding: 0 10px; */
+  position: relative;
 }
 
 .icon{
-  width: 20px;
-  margin-right: 7px;
-  display: inline-block;
+    margin-right: 7px;
+    display: inline-block;
+    border-radius: 50%;
+    background: #fff;
+    width: 30px;
+    height: 30px;
+    line-height: 30px;
+    padding: 0px 3px;
+    text-align: center;
+}
+.icon img{
+  width: 15px;
+  height: 15px;
+  max-width: 100%;
+  max-height: 100%;
 }
 
 .weather h3{
-  font-size: 28px;
-  color: #000;
+  font-size: 22px;
+  color: #f4f4f4;
   display: flex;
   flex-wrap: wrap;
   justify-content: flex-start;
@@ -102,10 +162,10 @@ h1,h2,h3,h4,h5{
 .tempNow{
   width: 100%;
   position: relative;
-  font-size: 50px;
+  font-size: 38px;
   color: #fff;
   font-weight: 700;
-  line-height: 59px;
+  line-height: 38px;
   text-transform: capitalize;
 }
 .tempNow .deg{
@@ -122,7 +182,8 @@ h1,h2,h3,h4,h5{
     padding: 20px;
     flex-wrap: wrap;
     background: #f3f3f3;
-    border-radius: 7px 7px 0 0;
+    border-radius: 7px 7px;
+    margin: 0 0 30px 0;
     justify-content: space-between;
 }
 .chooseWeather span{
@@ -179,11 +240,24 @@ h1,h2,h3,h4,h5{
   width: calc(50% - 2px);
   display: flex;
   align-items: flex-start;
-  padding: 20px;
+  padding: 16px;
   margin: 1px;
   flex-wrap: wrap;
-  height: 160px;
+  height: 110px;
 }
+.wrap:nth-of-type(1) .weather_box:nth-of-type(1){
+  border-radius: 0 0 0 5px;
+}
+.wrap:nth-of-type(1) .weather_box:nth-of-type(2){
+  border-radius: 0 0 5px 0;
+}
+.wrap:nth-of-type(2) .weather_box:nth-of-type(1){
+  border-radius: 5px 0 0 0;
+}
+.wrap:nth-of-type(2) .weather_box:nth-of-type(2){
+  border-radius: 0 5px 0 0;
+}
+
 
 .showTime{
   display: flex;
@@ -232,6 +306,9 @@ h1,h2,h3,h4,h5{
   padding: 30px;
   background:#f4f4f4;
   border-radius: 5px;
+  /* min-height: 100vh; */
+  position: relative;
+  margin: 40px 0 0 0;
 }
 .inputBox{
   width: 100%;
@@ -241,7 +318,7 @@ h1,h2,h3,h4,h5{
   display: block;
   padding: 0 0 10px 0;
   font-size: 17px;
-  color: #aaa;
+  color: #4691ee
 }
 .inputBox input{
   background: #fff; 
@@ -266,14 +343,41 @@ h1,h2,h3,h4,h5{
   padding: 0 15px;
   cursor: pointer;
   width: 30%;
+  font-size: 20px;
 }
-
+.modalBg{
+  width: 100%;
+  height: 100vh;
+  background: rgba(41, 126, 163, 0.8);
+  position: fixed;
+  left: 0;
+  top:0;
+  z-index: 100;
+}
 .wordDetails, .deff{
   width: 100%;
   display: flex;
   flex-wrap: wrap;
 }
-
+.wordDetails {
+  background: #eaeded;
+  position: fixed;
+  top: 20vh;
+  max-height: 60vh;
+  overflow: auto;
+  left: 10vw;
+  width: 80vw;
+  padding: 10px 40px;
+  z-index: 110;
+}
+.modalBg .cross{
+  position: absolute;
+  right: 20px;
+  top: 20px;
+  background: none;
+  border: none;
+  font-size: 40px;
+}
 .mainWord{
   width: 100%;
   margin: 20px 0;
@@ -314,32 +418,45 @@ h1,h2,h3,h4,h5{
 /* ............................ blog.................... */
 
 .blog_header {
-    width: 100%;
-    margin-bottom: 31px;
-    font-weight: 500;
-    color: #2b8fcb;
-    font-size: 24px;
-    padding: 0 0 10px;
-    border-bottom: 1px solid #6688ff;
+  width: 100%;
+  margin: 0 0 15px;
+  font-weight: 500;
+  color: #2b8fcb;
+  font-size: 24px;
+  padding: 0;
+}
+.blog_header .subtitle{
+  font-size: 15px;
+  color: #000;
+  display: block;
+  line-height: 30px;
 }
 .createBlog{
   width: 100%;
   display: flex;
   flex-wrap: wrap;
+  padding: 24px;
+  background: #f4f4f4;
+  border-radius: 5px;
 }
 .createBlog input,
 .createBlog textarea{
-    width: 100%;
-    border: 1px solid #518383;
-    height: 40px;
-    padding: 0 10px;
-    background: #696b6b;
-    margin-bottom: 10px;
-    color: #fff;
+  width: 100%;
+  border: 1px solid #3a93b5;
+  height: 40px;
+  padding: 0 10px;
+  background: #fff;
+  border-radius: 5px;
+  margin-bottom: 10px;
+  color: #3a93b5;
+}
+.createBlog input:focus,
+.createBlog textarea:focus{
+  outline: none;
 }
 .createBlog input::placeholder,
 .createBlog textarea::placeholder{
-  color:#fff
+  color:#3a93b5
 }
 .createBlog textarea{
   height: 150px;
@@ -348,13 +465,15 @@ h1,h2,h3,h4,h5{
 }
 .createBlog button{
   height: 50px;
-  background: #287ea3;
+  min-width: 80px;
+  background: #70ccf3;
   color: #fff;
   font-size: 16px;
   border: none;
   padding: 0 20px;
   width: 100px;
   cursor: pointer;
+  border-radius: 5px;
 }
 .createBlog button:disabled{
  cursor: no-drop;
@@ -375,6 +494,7 @@ h1,h2,h3,h4,h5{
     margin-bottom: 12px;
     padding: 20px;
     background: linear-gradient(45deg, rgba(12,111,238,1) 0%, rgba(67,142,237,1) 50%, rgba(115,188,249,1) 100%);
+  border-radius: 5px;
 }
 .blogList .title{
   color: #fff;
@@ -416,6 +536,87 @@ h1,h2,h3,h4,h5{
   font: 20px sans-serif;
   color: #aaa;
 }
+.mt-40{
+  margin-top: 40px;
+}
 
+.chart{
+  width: 100%;
+  padding: 0px;
+}
 
+.capCase{
+  text-transform: capitalize;
+}
+.chartWeather{
+  width: 100%;
+  position: relative;
+}
+/* ////////////////////////////////////////////////////////////////////////////////////////////// */
 
+.chart.pollution{
+   background: url(../images/pollu.jpg) 0 0 no-repeat;
+    background-size: cover;
+    min-height: 302px;
+    border-radius: 5px;
+    position: relative;
+    padding: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+} 
+.chart.pollution::after{
+  background: rgba(238, 144, 12, 0.7);
+  content: "";
+  position: absolute;
+  z-index: 2;
+  top:0;
+  bottom: 0;
+  left:0;
+  right:0;
+  border-radius: 5px;
+
+}
+.pollution ul{
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  position: relative;
+  z-index: 10;
+}
+.pollution ul::after{
+  content: "";
+  width: 100%;
+  height: 1px;
+  background-color: #ffceb3;
+  position: absolute;
+  top: 46%;
+}
+.pollution ul li{
+  padding: 0 16px;
+  text-align: center;
+  position: relative;
+}
+.pollution ul li::after{
+  content: "";
+  width: 2px;
+  height: 22px;
+  background-color: #ffceb3;
+  position: absolute;
+  top: 37%;
+}
+.pollution ul li h3{
+  font-size: 29px;
+    color: #76340b;
+    margin-top: 5px;
+}
+.pollution ul li p{
+  font-size: 22px;
+  color: #fafafa;
+  font-weight: 600;
+}
