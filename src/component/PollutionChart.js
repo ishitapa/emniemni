@@ -81,11 +81,11 @@ const fetchData2 = async () =>{
     fetchData1();  
   
    }, [cityNameToChart]);
+
    useEffect(() => {
     fetchData2();  
-   }, [rec1?.coord?.lat, rec1?.coord?.lon]);
+   }, [rec1?.coord?.lat, rec1?.coord?.lon,rec1?.list?.main?.aqi]);
  
-
 
 
 
@@ -94,11 +94,26 @@ const fetchData2 = async () =>{
     <>
     <div className="chartWeather">
       {isLoader ? <Loader/> : ""}  
-      <h3 className="blog_header"> <span className="capCase">{cityNameToChart}</span>'s pollution Chart
-       
-      </h3>
+      <div className="chooseWeather left">Pollution of  <span className="capCase"> { cityNameToChart } </span> is &nbsp;  
+      <span 
+        className={
+          rec?.list?.[0]?.main?.aqi === 1 ? "good" :
+        rec?.list?.[0]?.main?.aqi === 2 ? "con fair" :
+        rec?.list?.[0]?.main?.aqi === 3 ? "moderate" :
+        rec?.list?.[0]?.main?.aqi === 4 ? "poor" :
+        rec?.list?.[0]?.main?.aqi === 5 ?"vPoor" :""
+        }
+      >{ 
+        rec?.list?.[0]?.main?.aqi === 1 ? " Good" :
+        rec?.list?.[0]?.main?.aqi === 2 ? " Fair" :
+        rec?.list?.[0]?.main?.aqi === 3 ? " Moderate" :
+        rec?.list?.[0]?.main?.aqi === 4 ? " Poor" :
+        rec?.list?.[0]?.main?.aqi === 5 ? " Very Poor" : ""
+
+      }</span>
+      </div>
       <div className="chart pollution">
-         {/* <Line options={options} data={data} /> */}
+         
           <ul>
               
               

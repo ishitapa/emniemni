@@ -122,7 +122,7 @@ const fetchData2 = async () =>{
     <div className="chartWeather mt-40">
       {isLoader ? <Loader/> : ""}  
       <h3 className="blog_header"> 
-        <span className="capCase">{cityNameToChart}</span>'s Temperature Chart of 48hr
+      Temperature Chart of 48hr of <span className="capCase">{cityNameToChart}   </span>
         <span className="subtitle">(starting from today)</span>
       </h3>
       <div className="chart">

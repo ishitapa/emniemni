@@ -8,7 +8,7 @@ import wind  from "../images/wind.svg";
 import cloud  from "../images/cloud.svg";
 
 
-function Weather({inputCity,inputLon, inputLat}) {
+function Weather({cityNameToChart}) {
 
   const [isLoader, setIsLoader] = useState(false);
   const [rec,setRec] = useState({});
@@ -20,10 +20,10 @@ function Weather({inputCity,inputLon, inputLat}) {
 
   const fetchData1 = async () =>{
     let inputval ="";
-    if(inputval1 === ""){
+    if(cityNameToChart === ""){
       inputval = "kolkata"
     }else{
-      inputval=inputval1
+      inputval=cityNameToChart
     }
     try {
       setIsLoader(true);
@@ -33,7 +33,7 @@ function Weather({inputCity,inputLon, inputLat}) {
         const res = await response.json();
         if(res) { 
          // console.log("new api",res);
-         // console.log("inputval1",inputval1);
+         // console.log("cityNameToChart",inputval1);
           setRec(res);
           return;
         }
@@ -47,16 +47,10 @@ function Weather({inputCity,inputLon, inputLat}) {
   
   
   useEffect(() => {
-    cityValueSubmit(); 
-   }, []);
+    fetchData1()
+   }, [cityNameToChart]);
 
-const cityValueHandler = (e) =>{
- setInputval1(e.target.value);
-}
-const cityValueSubmit = (e) =>{
-  fetchData1();
-  inputCity ( (inputval1 === "") ? "kolkata" : inputval1);
- }
+
 
 const theDate = new Date();
 const toDayDate = theDate.getDate();
@@ -71,32 +65,6 @@ const timeNow =  (hourNow < 10 ? "0"+hourNow : hourNow ) + ":" +  (minNow < 10 ?
 
 
 
-   const [rec2,setRec2] = useState({});
-
-   const fetchData3 = async () =>{
-    
-    try {
-      setIsLoader(true);
-    
-    const response = await fetch('https://tile.openweathermap.org/map/clouds_new/1/1/1.png?appid='+apik);
-     if(response){
-        const res = await response.json();
-        if(res) { 
-          setRec2(res);
-          console.log("pollution list api",rec2);
-          return;
-        }
-      }
-      }catch (e) {
-      //console.log(e.message);
-    }finally{
-      setIsLoader(false);
-    }
-  }
-  useEffect(() => {
-    fetchData3();  
-   }, []);
-
 
 
 
@@ -107,22 +75,7 @@ const timeNow =  (hourNow < 10 ? "0"+hourNow : hourNow ) + ":" +  (minNow < 10 ?
     <div className="weather">
     {isLoader ? <Loader/> : ""}  
 
-          <div className="chooseWeather">
-            <div className="city">
-                  <span>Choose a city for weather report </span>
-                  <div className="selectedCountry">
-                    <input type="text" value={inputval1} 
-                      onChange={cityValueHandler}
-                      placeholder="Write city name , showing Kolkata"
-                     />
-                     <button onClick={cityValueSubmit}>Submit</button>
-                  </div>
-            </div>   
-            <div className="showTime">
-              <span>{toDay}</span>
-              {timeNow}
-            </div>   
-          </div>
+      
           <div className="wrap">
             <div className="weather_box">
                <h3><span className="icon"><img src={temperature} alt=""/> </span> Temperature</h3>
@@ -145,9 +98,11 @@ const timeNow =  (hourNow < 10 ? "0"+hourNow : hourNow ) + ":" +  (minNow < 10 ?
                {rec?.clouds?.all != null ? <div className="tempNow">{rec?.weather?.[0].description} <span className="deg"></span></div> : ""}
             </div>
           </div>
-          {/* <div className="weatherFooter">
-             Weather application tool by Ishita Paul Roy
-          </div> */}
+          <div className="weatherFooter">
+           <p>Temperature feels like : <span> {(rec?.main?.feels_like - 273).toFixed(2) } deg</span></p>
+           <p>Temperature min :  <span>{(rec?.main?.temp_min - 273).toFixed(2) } deg</span></p>
+           <p>Temperature max :  <span>{(rec?.main?.temp_max - 273).toFixed(2) } deg</span></p>
+          </div>
         </div>
     </>
   );
