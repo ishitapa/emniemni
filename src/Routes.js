@@ -3,9 +3,9 @@ import { BrowserRouter as Router, Routes, Link, Route } from "react-router-dom"
 
 //import logo from './logo.svg';
 import './css/style.css';
-import DashBoard from './component/Dashboard';
-import Blog from './component/Blog';
-import Media from './component/Media';
+import WeatherDashboard from './component/weather/WeatherDashboard';
+import Blog from './component/blog/Blog';
+import MediaDashboard from './component/media/MediaDashboard';
 
 function RoutesCont() {
   return (
@@ -23,17 +23,17 @@ function RoutesCont() {
           <Link to="/blog">Blog </Link>
 
           </li>
-          {/* <li className='specialFont'>
-          <Link to="/media">Social media </Link>
+          <li className='specialFont'>
+              <Link to="/media">Photo Editor </Link>
             
-          </li> */}
+          </li>
         </ul>
       </aside>
       <section className='mainContain'>
       <Routes>
-         <Route path="/" element={<DashBoard/>}/>
+         <Route path="/" element={<WeatherDashboard/>}/>
          <Route path="/Blog" element={<Blog/>}/>
-         <Route path="/media" element={<Media/>}/>
+         <Route path="/media" element={<MediaDashboard/>}/>
       </Routes>
 
       </section>

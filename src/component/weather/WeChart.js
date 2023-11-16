@@ -13,13 +13,7 @@ import { Line } from 'react-chartjs-2';
 // import faker from 'faker';
 import { faker } from '@faker-js/faker';
 
-import Loader from "./Loader";
-import temperature  from "../images/temperature.svg";
-import droplet  from "../images/droplet.svg";
-import wind  from "../images/wind.svg";
-import Weather  from "./Weather";
-import Dictionary from "./Dictionary"; 
-import Blog from "./Blog";
+import Loader from "../Loader";
 
 
 function WeChart({cityNameToChart}) {

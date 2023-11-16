@@ -1,13 +1,8 @@
 import React, { useState, useEffect } from "react";
 
 
-import Loader from "./Loader";
-import temperature  from "../images/temperature.svg";
-import droplet  from "../images/droplet.svg";
-import wind  from "../images/wind.svg";
-import Weather  from "./Weather";
-import Dictionary from "./Dictionary"; 
-import Blog from "./Blog";
+import Loader from "../Loader";
+
 //import pollution from "../images/pollu.jpg";
 
 
@@ -94,7 +89,7 @@ const fetchData2 = async () =>{
     <>
     <div className="chartWeather">
       {isLoader ? <Loader/> : ""}  
-      <div className="chooseWeather left">Pollution of  <span className="capCase"> { cityNameToChart } </span> is &nbsp;  
+      <div className="chooseWeather left">Pollution label of  <span className="capCase"> { cityNameToChart } </span> is &nbsp;  
       <span 
         className={
           rec?.list?.[0]?.main?.aqi === 1 ? "good" :

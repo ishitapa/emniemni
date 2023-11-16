@@ -1,11 +1,11 @@
 
 import React, { useState, useEffect } from "react";
 
-import Loader from "./Loader";
-import temperature  from "../images/temperature.svg";
-import droplet  from "../images/droplet.svg";
-import wind  from "../images/wind.svg";
-import cloud  from "../images/cloud.svg";
+import Loader from "../Loader";
+import temperature  from "../../images/temperature.svg";
+import droplet  from "../../images/droplet.svg";
+import wind  from "../../images/wind.svg";
+import cloud  from "../../images/cloud.svg";
 
 
 function Weather({cityNameToChart}) {

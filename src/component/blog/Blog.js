@@ -2,9 +2,6 @@
 import React, { useState, useEffect } from "react";
 
 
-// import temperature  from "../images/temperature.svg";
-// import droplet  from "../images/droplet.svg";
-// import wind  from "../images/wind.svg";
 import Dictionary from "./Dictionary"; 
 
 

@@ -1,18 +1,14 @@
 
 import React, { useState, useEffect } from "react";
 
-import Loader from "./Loader";
-import temperature  from "../images/temperature.svg";
-import droplet  from "../images/droplet.svg";
-import wind  from "../images/wind.svg";
+
 import Weather  from "./Weather";
 import PollutionChart from "./PollutionChart"; 
-import PollutionForecast from "./PollutionForecast"; 
+ 
 import WeChart from "./WeChart"; 
-import Blog from "./Blog";
 
 
-function DashBoard() {
+function WeatherDashboard() {
 
   const [dateTime, seDateTime] = useState();
 
@@ -94,4 +90,4 @@ function DashBoard() {
   );
 }
  
-export default DashBoard;
+export default WeatherDashboard;
