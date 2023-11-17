@@ -1,11 +1,11 @@
 
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect,useRef } from "react";
 //import AudioPlayer from 'react-h5-audio-player';
 import 'react-h5-audio-player/lib/styles.css';
 import effects from '../../images/effects.png';
 import borders from '../../images/borders.png';
 import stickers from '../../images/stickers.png';
-import crop from '../../images/crop.png';
+import croping from '../../images/crop.png';
 import rotate from '../../images/rotate.png';
 import brightness from '../../images/brightness.png';
 import hue_saturation from '../../images/hue_saturation.png';
@@ -17,11 +17,24 @@ import filter3 from '../../images/filter3.JPG';
 import filter4 from '../../images/filter4.JPG';
 import filternone from '../../images/filternone.JPG';
 import photo from '../../images/photo.jpg';
+import sticker1 from '../../images/sticker1.png';
+import sticker2 from '../../images/sticker2.png';
+import sticker3 from '../../images/sticker3.png';
 
 
+
+import ReactCrop, {   centerCrop,
+  makeAspectCrop,
+  Crop,
+  PixelCrop,
+  convertToPixelCrop} from 'react-image-crop'
+import 'react-image-crop/dist/ReactCrop.css';
+import Draggable, { DraggableData, DraggableEvent } from "react-draggable";
+
+import { toPng } from 'html-to-image';
 
 function MediaDashboard() {
-
+  const elementRef = useRef(null);
   // const [isLoader, setIsLoader] = useState(false);
   const [show,setShow] = useState({
     tab1 : true,
@@ -47,7 +60,35 @@ function MediaDashboard() {
     green: false,
     none: true
   });
+  const [borderComponent, setBorderComponent] = useState({
+      width: 0,
+      color: "",
+      style:""
+  })
+
+  const imageChange = (e) => {
+    if (e.target.files && e.target.files.length > 0) {
+      setSelectedImage(e.target.files[0]);
+    }
+  };
+  const htmlToImageConvert = () => {
+    toPng(elementRef.current, { cacheBust: false })
+      .then((dataUrl) => {
+        const link = document.createElement("a");
+        link.download = "my-image-name.png";
+        link.href = dataUrl;
+        link.click();
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+
+  const removeSelectedImage = () => {
+    setSelectedImage();
+  };
   
+  // .................... image effect .............................
   const effectsHandler = (e) =>{
     setShow({
       tab2 : false,
@@ -132,29 +173,7 @@ function MediaDashboard() {
       tab7 : true
     })
   }
-  const rgb_effectHandler = (e) =>{
-    setShow({
-      tab2 : false,
-    tab3 : false,
-    tab4 : false,
-    tab5 : false,
-    tab6 : false,
-    tab7 : false,
-    tab1 : false,
-      tab8 : true
-    })
-  }
-  
-
-  const imageChange = (e) => {
-    if (e.target.files && e.target.files.length > 0) {
-      setSelectedImage(e.target.files[0]);
-    }
-  };
-
-  const removeSelectedImage = () => {
-    setSelectedImage();
-  };
+ 
 
   const effectBlue = () =>{
     setEffectSelect({
@@ -201,6 +220,58 @@ function MediaDashboard() {
       none: true
     })
   }
+  // .................... image effect .............................
+
+// ....................... image border ................................
+
+const borderComponentHandler = (e) =>{
+  const name = e.target.name;
+  const val = e.target.value;
+  setBorderComponent({
+    ...borderComponent,
+    [name] : val,
+  })
+}
+
+// ....................... image border ................................
+
+// ..................................... image sticker ................................
+const [sticker,setSticker] = useState({
+  sticker1:false,
+  sticker2:false,
+  sticker3:false,
+})
+const clickSticker1 = () =>{
+ // console.log(data);
+  // var newDragg = document.createElement("Draggable");
+  // newDragg.setAttribute("id", "dragg"+data);
+  // document.getElementById("stickerOuter").appendChild(newDragg);
+  // var newDiv = document.createElement("div");
+  // newDiv.setAttribute("id", "stick"+data);
+  // newDiv.setAttribute("class", "stick");
+  // var image = document.createElement("img");
+  // image.setAttribute("src", sticker1);
+  //   document.getElementById("dragg"+data).appendChild(newDiv);
+  //   document.getElementById("stick"+data).appendChild(image);
+  setSticker({
+    ...sticker,
+    sticker1:true
+  })
+}
+const clickSticker2 = (e) =>{
+  setSticker({
+    ...sticker,
+    sticker2:true
+  })
+}
+const clickSticker3 = (e) =>{
+  setSticker({
+    ...sticker,
+    sticker3:true
+  })
+}
+
+// ........................................... image sticker ...........................
   
 useEffect(() => {
  }, []);
@@ -218,43 +289,53 @@ useEffect(() => {
                             <li className={show.tab1 ? "active" : ""}>
                               <button
                                onClick={effectsHandler}
-                              ><img src={effects} alt="Effects" title="Effects"/></button> 
+                              ><img src={effects} alt="Effects" title="Effects"/>
+                               <span>Effect</span>
+                              </button> 
                             </li>
                             <li className={show.tab2 ? "active" : ""}> 
                               <button
                                onClick={borderHandler}
-                              ><img src={borders} alt="Borders" title="Borders"/></button>
+                              ><img src={borders} alt="Borders" title="Borders"/>
+                              <span>Border</span>
+                              </button>
                             </li>   
                             <li className={show.tab3 ? "active" : ""}> 
                               <button
                                onClick={stickersHandler}                 
-                              ><img src={stickers} alt="Stickers" title="Stickers"/></button>
+                              ><img src={stickers} alt="Stickers" title="Stickers"/>
+                              <span>Stickers</span>
+                              </button>
                             </li>
                             <li className={show.tab4 ? "active" : ""}> 
                               <button
                                onClick={cropHandler}                 
-                              ><img src={crop} alt="Crop" title="Crop"/></button>
+                              ><img src={croping} alt="Crop" title="Crop"/>
+                              <span>Crop</span>
+                              </button>
                             </li>    
                             <li className={show.tab5 ? "active" : ""}> 
                               <button
                                onClick={rotateHandler}                 
-                              ><img src={rotate} alt="Rotate" title="Rotate"/></button>
+                              ><img src={rotate} alt="Rotate" title="Rotate"/>
+                              <span>Rotate</span>
+                              </button>
                             </li>
                             <li className={show.tab6 ? "active" : ""}> 
                               <button
                                onClick={brightnessHandler}                 
-                              ><img src={brightness} alt="Brightness" title="Brightness"/></button>
+                              ><img src={brightness} alt="Brightness" title="Brightness"/>
+                               <span>Brightness</span>
+                              </button>
                             </li>   
                             <li className={show.tab7 ? "active" : ""}> 
                               <button
                                onClick={hue_saturationHandler}                 
-                              ><img src={hue_saturation} alt="Hue-saturation" title="Hue-saturation"/></button>
+                              ><img src={hue_saturation} alt="Hue-saturation" title="Hue-saturation"/>
+                              <span>Hue Saturation</span>
+                              </button>
                             </li>
-                            <li className={show.tab8 ? "active" : ""}> 
-                              <button
-                               onClick={rgb_effectHandler}                 
-                              ><img src={rgb_effect} alt="RGB Effect" title="RGB Effect"/></button>
-                            </li>   
+                              
                            
                         </ul>            
                     </div> 
@@ -276,29 +357,52 @@ useEffect(() => {
                      {show.tab2 &&
                         <div id="tab-2" className="tab-content">
                             <div className="ayilad_submenu_holder">
-                              <img className="active" src={filter1} alt="" title=""/><img src={filter2} alt="" title=""/>
-                              <img src={filter3} alt="" title=""/><img src={filter4} alt="" title=""/><img src={filter1} alt="" title=""/>
-                              <img src={filter4} alt="" title=""/>
+                             <p>Border width</p>
+                             <input type='text' name="width"
+                              value={borderComponent.width}
+                              onChange={borderComponentHandler}
+                              />
+                              <p>Border color</p>
+                              <input type='color' name="color"
+                                  value={borderComponent.color}
+                              onChange={borderComponentHandler}
+
+                              />
+                              <p>Border type</p>
+                              <select value={borderComponent.style} name="style"
+                              onChange={borderComponentHandler}
+
+                               >
+                                <option value='solid'>Solid</option>
+                                <option value='dashed'>Dashed</option>
+                                <option value='dotted'>Dotted </option>
+                              </select>
                             </div> 
-                            {/* <div className="ayilad_submenu_control">
-                                  <button className="action_btn black_btn">Cancel</button>
-                                  <button className="action_btn blue_btn">Apply</button>  
-                            </div> */}
+                            
                         </div>
                     }
                     {show.tab3 &&
                       <div id="tab-3" className="tab-content">
                           <div className="ayilad_submenu_holder">
                           <p className="action_details">Type 1</p>
-                            <img className="active" src={filter1} alt="" title=""/>
-                            <img src={filter2} alt="" title=""/>
-                              <p className="action_details">Type 2</p>
-                            <img src={filter3} alt="" title=""/>
+                          <button className="noBg" onClick={clickSticker1}>
+                            <img className="" src={sticker1} alt="" title=""/>
+                          </button>
+                          <button className="noBg" 
+                            onClick={clickSticker2}
+                          >
+                            <img className="" src={sticker2} alt="" title=""/>
+                          </button>  
+                          <button className="noBg" 
+                             onClick={clickSticker3}
+                          >  
+                            <img className="" src={sticker3} alt="" title=""/>
+                          </button>  
                           </div> 
-                          <div className="ayilad_submenu_control">
+                          {/* <div className="ayilad_submenu_control">
                                 <button className="action_btn black_btn">Cancel</button>
                                 <button className="action_btn blue_btn">Apply</button>  
-                          </div>       
+                          </div>        */}
                       </div>
                     }
                     {show.tab4 &&
@@ -338,15 +442,7 @@ useEffect(() => {
                           </div>
                       </div>
                     }
-                    {show.tab8 &&
-                      <div id="tab-8" className="tab-content">
-                          <p className="action_details">Rgb effect</p>
-                          <div className="ayilad_submenu_control">
-                                <button className="action_btn black_btn">Cancel</button>
-                                <button className="action_btn blue_btn">Apply</button>  
-                          </div>
-                      </div>
-                     }
+                    
           
 
                     </div> 
@@ -366,11 +462,19 @@ useEffect(() => {
                 </div>
                 {/* <!-- when photo is not uploaded end here --> */}
                 {selectedImage ?
-                  <div className="photo_holder">
+                  <div className="photo_holder" ref={elementRef}>
+                   
                     <img 
                       src={URL.createObjectURL(selectedImage)}
                       alt="Thumb"
-                      title=""/>
+                      title=""
+                      style={{ 
+                        borderWidth : borderComponent.width + "px", 
+                        borderColor : borderComponent.color, 
+                        borderStyle : borderComponent.style, 
+                        }} 
+                      /> 
+               
                       <div style={{ background: 
                         effectSelect.red ? effectConstant.red :
                         effectSelect.blue ? effectConstant.blue :
@@ -378,13 +482,61 @@ useEffect(() => {
                         effectSelect.yellow ? effectConstant.yellow :
                         ""
                         }} className="effect"></div>
+                        <div className="stickerOuter" id="stickerOuter">
+                          {sticker.sticker1 &&
+                           <Draggable>
+                            <div className="stick">
+                              <img src={sticker1} alt=""/>
+                              <button className="noBg" onClick={()=>setSticker({...sticker, sticker1:false})}
+                              >X</button>
+                            </div>
+                          </Draggable>
+                          }
+                          {sticker.sticker2 &&
+                          <Draggable>
+                            <div className="stick">
+                              <img src={sticker2} alt=""/>
+                              <button className="noBg" onClick={()=>setSticker({...sticker, sticker2:false})}
+                              >X</button>
+                            </div>
+                          </Draggable>
+                          }
+                          {sticker.sticker3 &&
+                          <Draggable>
+                            <div className="stick">
+                              <img src={sticker3} alt=""/>
+                              <button className="noBg" onClick={()=>setSticker({...sticker, sticker3:false})}
+                               >X</button>
+                            </div>
+                          </Draggable>
+                          }
+                        </div>
                   </div> : <div className='notSelected'> No image Selected</div>
                 }
                 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
                 <div className="ayilad_action_panel">
                     <button className="action_btn black_btn">Reset All</button>
-                    <button className="action_btn yellow_btn">Download</button>
+                    <button className="action_btn yellow_btn"
+                      onClick={htmlToImageConvert}
+                    >Download</button>
                     <button className="action_btn blue_btn"
                       onClick={removeSelectedImage }
                     >Remove Image </button>
