@@ -2,7 +2,7 @@ import React from "react";
 import { BrowserRouter as Router, Routes, Link, Route } from "react-router-dom"
 
 //import logo from './logo.svg';
-//import './css/faicon.css' ;
+
 import './css/style.css';
 import WeatherDashboard from './component/weather/WeatherDashboard';
 import Blog from './component/blog/Blog';
@@ -15,7 +15,7 @@ function RoutesCont() {
       <aside className='aside'>
         <div className='profile specialFont'>Profile</div>
        
-        <ul>
+        <ul> 
           
           <li className='specialFont'>
           <Link to="/">Weather </Link>

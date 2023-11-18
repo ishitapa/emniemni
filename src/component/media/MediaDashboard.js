@@ -6,7 +6,7 @@ import effects from '../../images/effects.png';
 import borders from '../../images/borders.png';
 import stickers from '../../images/stickers.png';
 import croping from '../../images/crop.png';
-import rotate from '../../images/rotate.png';
+import rotateimg from '../../images/rotate.png';
 import brightness from '../../images/brightness.png';
 import hue_saturation from '../../images/hue_saturation.png';
 import rgb_effect from '../../images/rgb_effect.png';
@@ -20,6 +20,8 @@ import photo from '../../images/photo.jpg';
 import sticker1 from '../../images/sticker1.png';
 import sticker2 from '../../images/sticker2.png';
 import sticker3 from '../../images/sticker3.png';
+import arrow from '../../images/arrow.png';
+import twoArrow from '../../images/twoArrow.png';
 
 
 
@@ -272,6 +274,130 @@ const clickSticker3 = (e) =>{
 }
 
 // ........................................... image sticker ...........................
+
+
+//.................................. image rotate .............................
+const [rotate,setRotate] = useState({
+  left:false,
+  right:false,
+  top:false,
+  bottom:false,
+  none: true
+})
+const [rotateVal,setRotateVal] = useState("");
+
+const rotateLeftHandler = () =>{
+  setRotateVal("rotate(-270deg)")
+}
+const rotateTopHandler = () =>{
+  setRotateVal("rotate(180deg)")
+}
+const rotateRightHandler = () =>{
+  setRotateVal("rotate(270deg)")
+}
+const rotateBottomHandler = () =>{
+  setRotateVal("rotate(0deg)")
+}
+
+// .........................................image rotate .............................
+
+//.................................. image brightness .............................
+
+const [brightnessVal, setBrightnessVal] = useState(1)
+
+const brightnessComponentHandler = (e) =>{
+  setBrightnessVal(e.target.value);
+}
+const cancelBrightnessComponentHandler = () =>{
+  setBrightnessVal(1)
+}
+const [hueVal, setHueVal] = useState(0)
+
+const hueComponentHandler = (e) =>{
+  setHueVal(e.target.value);
+}
+const cancelHueComponentHandler = () =>{
+  setHueVal(0)
+}
+
+const [saturateVal, setSaturateVal] = useState(100)
+
+const saturateComponentHandler = (e) =>{
+  setSaturateVal(e.target.value);
+}
+const cancelSaturateComponentHandler = () =>{
+  setSaturateVal(100)
+}
+// ............................................. resizeBy  ............................
+  
+  const [size, setSize] = useState({ x: 200, y: 200 });
+
+  const handler = (mouseDownEvent) => {
+    const startSize = size;
+    const startPosition = { x: mouseDownEvent.pageX, y: mouseDownEvent.pageY };
+    
+    function onMouseMove(mouseMoveEvent) {
+      setSize(currentSize => ({ 
+        x: startSize.x - startPosition.x + mouseMoveEvent.pageX, 
+        y: startSize.y - startPosition.y + mouseMoveEvent.pageY 
+      }));
+    }
+    function onMouseUp() {
+      document.body.removeEventListener("mousemove", onMouseMove);
+      // uncomment the following line if not using `{ once: true }`
+      // document.body.removeEventListener("mouseup", onMouseUp);
+    }
+    
+    document.body.addEventListener("mousemove", onMouseMove);
+    document.body.addEventListener("mouseup", onMouseUp, { once: true });
+  };
+  const [size2, setSize2] = useState({ x: 200, y: 200 });
+
+  const handler2 = (mouseDownEvent) => {
+    const startSize = size;
+    const startPosition = { x: mouseDownEvent.pageX, y: mouseDownEvent.pageY };
+    
+    function onMouseMove(mouseMoveEvent) {
+      setSize2(currentSize => ({ 
+        x: startSize.x - startPosition.x + mouseMoveEvent.pageX, 
+        y: startSize.y - startPosition.y + mouseMoveEvent.pageY 
+      }));
+    }
+    function onMouseUp() {
+      document.body.removeEventListener("mousemove", onMouseMove);
+      // uncomment the following line if not using `{ once: true }`
+      // document.body.removeEventListener("mouseup", onMouseUp);
+    }
+    
+    document.body.addEventListener("mousemove", onMouseMove);
+    document.body.addEventListener("mouseup", onMouseUp, { once: true });
+  };
+  const [size3, setSize3] = useState({ x: 200, y: 200 });
+
+  const handler3 = (mouseDownEvent) => {
+    const startSize = size3;
+    const startPosition = { x: mouseDownEvent.pageX, y: mouseDownEvent.pageY };
+    
+    function onMouseMove(mouseMoveEvent) {
+      setSize3(currentSize => ({ 
+        x: startSize.x - startPosition.x + mouseMoveEvent.pageX, 
+        y: startSize.y - startPosition.y + mouseMoveEvent.pageY 
+      }));
+    }
+    function onMouseUp() {
+      document.body.removeEventListener("mousemove", onMouseMove);
+      // uncomment the following line if not using `{ once: true }`
+      // document.body.removeEventListener("mouseup", onMouseUp);
+    }
+    
+    document.body.addEventListener("mousemove", onMouseMove);
+    document.body.addEventListener("mouseup", onMouseUp, { once: true });
+  };
+
+
+
+
+// ............................................. resizeBy  ............................
   
 useEffect(() => {
  }, []);
@@ -317,7 +443,7 @@ useEffect(() => {
                             <li className={show.tab5 ? "active" : ""}> 
                               <button
                                onClick={rotateHandler}                 
-                              ><img src={rotate} alt="Rotate" title="Rotate"/>
+                              ><img src={rotateimg} alt="Rotate" title="Rotate"/>
                               <span>Rotate</span>
                               </button>
                             </li>
@@ -343,6 +469,8 @@ useEffect(() => {
                       {show.tab1 &&
                         <div id="tab-1" className="tab-content">
                             <div className="ayilad_submenu_holder">
+                          <p className="action_details">Effects</p>
+
                             <button className="noBg" onClick={effectNone}><img  className={effectSelect.none ? "active" :""} src={filternone} alt="" title=""/></button>
 
                             <button className="noBg" onClick={effectRed}><img className={effectSelect.red ? "active" :""} src={filter1} alt="" title=""/></button>
@@ -357,7 +485,7 @@ useEffect(() => {
                      {show.tab2 &&
                         <div id="tab-2" className="tab-content">
                             <div className="ayilad_submenu_holder">
-                             <p>Border width</p>
+                            <p className="action_details">Border width</p>
                              <input type='text' name="width"
                               value={borderComponent.width}
                               onChange={borderComponentHandler}
@@ -384,7 +512,7 @@ useEffect(() => {
                     {show.tab3 &&
                       <div id="tab-3" className="tab-content">
                           <div className="ayilad_submenu_holder">
-                          <p className="action_details">Type 1</p>
+                          <p className="action_details">Stickers</p>
                           <button className="noBg" onClick={clickSticker1}>
                             <img className="" src={sticker1} alt="" title=""/>
                           </button>
@@ -418,28 +546,77 @@ useEffect(() => {
                     {show.tab5 &&
                       <div id="tab-5" className="tab-content">
                          <div className="ayilad_submenu_control">
-                         <p className="action_details">Rotate by: <span>30 deg</span></p>
-                              <button className="action_btn black_btn">Cancel</button>
-                              <button className="action_btn blue_btn">Rotate</button>  
+                         <p className="action_details">Rotate Image </p>
+                         <div className="btnGroup">
+                              <button className="noBg rotate left"
+                                onClick={rotateLeftHandler}
+                              ><img src={arrow} alt=""/></button>
+                              <button className="noBg rotate top"
+                                onClick={rotateTopHandler}
+                              ><img src={arrow} alt=""/></button>
+                              <button className="noBg rotate right"
+                                onClick={rotateRightHandler}
+                              ><img src={arrow} alt=""/></button> 
+                              <button className="noBg rotate bottom"
+                                onClick={rotateBottomHandler}
+                              ><img src={arrow} alt=""/></button>
+                         </div>
                          </div> 
                       </div>
                     }
                     {show.tab6 &&
                       <div id="tab-6" className="tab-content">
                           <p className="action_details">Brightness</p>
-                         <div className="ayilad_submenu_control">
-                              <button className="action_btn black_btn">Cancel</button>
-                              <button className="action_btn blue_btn">Apply</button>  
-                         </div> 
+                          <p className="action_details">
+                             <input type='range' name="width"
+                              defaultValue={brightnessVal}
+                              onChange={brightnessComponentHandler}
+                              min={0}
+                              max={3}
+                              step={0.25}
+                              />  
+                          </p>
+                            <div className="ayilad_submenu_control">
+                              <button className="action_btn black_btn"
+                                onClick={cancelBrightnessComponentHandler}                              
+                              >Cancel</button>
+                            </div>  
                       </div>
                     }
                     {show.tab7 &&
                       <div id="tab-7" className="tab-content">
-                            <p className="action_details">Hue Saturation</p>
+                            <p className="action_details">Hue</p>
+                            
+                            <p className="action_details">
+                             <input type='range' name="width"
+                              defaultValue={hueVal}
+                              onChange={hueComponentHandler}
+                              min={0}
+                              max={360}
+                              step={5}
+                              />  
+                          </p>
                           <div className="ayilad_submenu_control">
-                                <button className="action_btn black_btn">Cancel</button>
-                                <button className="action_btn blue_btn">Apply</button>  
-                          </div>
+                              <button className="action_btn black_btn"
+                                onClick={cancelHueComponentHandler}                              
+                              >Cancel</button>
+                            </div>
+                          <p className="action_details">Saturation</p>
+                            
+                            <p className="action_details">
+                             <input type='range' name="width"
+                              defaultValue={saturateVal}
+                              onChange={saturateComponentHandler}
+                              min={0}
+                              max={200}
+                              step={10}
+                              />  
+                          </p>
+                          <div className="ayilad_submenu_control">
+                              <button className="action_btn black_btn"
+                                onClick={cancelSaturateComponentHandler}                              
+                              >Cancel</button>
+                            </div>
                       </div>
                     }
                     
@@ -472,6 +649,8 @@ useEffect(() => {
                         borderWidth : borderComponent.width + "px", 
                         borderColor : borderComponent.color, 
                         borderStyle : borderComponent.style, 
+                        transform: rotateVal,
+                        filter: "brightness("+brightnessVal+") hue-rotate("+ hueVal+"deg) saturate("+saturateVal+"%)" ,
                         }} 
                       /> 
                
@@ -486,7 +665,8 @@ useEffect(() => {
                           {sticker.sticker1 &&
                            <Draggable>
                             <div className="stick">
-                              <img src={sticker1} alt=""/>
+                              <img src={sticker1} alt=""  style={{ width: size.x, height: size.y }}/>
+                              <button type="button" className="noBg resize" onMouseDown={handler} ><img src={twoArrow} alt=""/></button>
                               <button className="noBg" onClick={()=>setSticker({...sticker, sticker1:false})}
                               >X</button>
                             </div>
@@ -495,7 +675,8 @@ useEffect(() => {
                           {sticker.sticker2 &&
                           <Draggable>
                             <div className="stick">
-                              <img src={sticker2} alt=""/>
+                              <img src={sticker2} alt="" style={{ width: size2.x, height: size2.y }}/>
+                              <button type="button" className="noBg resize" onMouseDown={handler2} ><img src={twoArrow} alt=""/></button>
                               <button className="noBg" onClick={()=>setSticker({...sticker, sticker2:false})}
                               >X</button>
                             </div>
@@ -504,7 +685,8 @@ useEffect(() => {
                           {sticker.sticker3 &&
                           <Draggable>
                             <div className="stick">
-                              <img src={sticker3} alt=""/>
+                              <img src={sticker3} alt="" style={{ width: size3.x, height: size3.y }}/>
+                              <button type="button" className="noBg resize" onMouseDown={handler3} ><img src={twoArrow} alt=""/></button>
                               <button className="noBg" onClick={()=>setSticker({...sticker, sticker3:false})}
                                >X</button>
                             </div>

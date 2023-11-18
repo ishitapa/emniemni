@@ -954,11 +954,14 @@ h1,h2,h3,h4,h5{
   left: 0;
   right: 0;
   z-index: 3;
-  display: flex;
-    flex-wrap: wrap;
+  /* display: flex;
+    flex-wrap: wrap; */
 }
 .stickerOuter .stick{
   position: relative;
+    width: auto;
+    display: inline-block;
+    border: 1px dashed #ddd;
 }
 .stick button.noBg {
   background: #fff;
@@ -968,16 +971,57 @@ h1,h2,h3,h4,h5{
   line-height: 20px;
   box-shadow: 3px 3px 4px rgba(0,0,0,0.5);
   position: absolute;
-  top: 30px;
-  right: 30px;
+  top: 10px;
+  right: 10px;
+}
+.btnGroup{
+  position: relative;
+  width: 100%;
+  padding: 10px;
+}
+button.rotate{
+  width: 30px;
+  height: 30px;
+  position: absolute;
+}
+button.rotate img{
+  max-width: 100%;
 }
 
+button.rotate.left{
+  top: 17px;
+  left: 9px;
+}
+button.rotate.top{
+  top: -5px;
+  left: 37px;
+  transform: rotate(90deg);
+}
+button.rotate.right{
+  top: 17px;
+  left: 68px;
+  transform: rotate(180deg);
+}
+button.rotate.bottom{
+  top: 37px;
+  left: 38px;
+  transform: rotate(270deg);
+}
+/* ............................. brightness ......................./ */
 
 
-
-
-
-
+.action_details input[type="range"]{
+  max-width: 100%;
+}
+.stick button.noBg.resize {
+  top: auto;
+  transform: rotate(270deg);
+  background: rgba(255,255,255,0.6);
+  width: 30px;
+  bottom: -6px;
+  right: -13px;
+  padding: 0 6px;
+}
 
 
 
